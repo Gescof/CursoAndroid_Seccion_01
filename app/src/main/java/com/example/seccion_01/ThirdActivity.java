@@ -96,18 +96,27 @@ public class ThirdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = editTextMail.getText().toString();
                 if(email != null && !email.isEmpty()) {
+                    // Email rápido
                     Intent intentMailTo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
-                    /* Email mas completo
-                    Intent intentMailTo = new Intent(Intent.ACTION_SENDTO, Uri.parse(email));
-                    intentMailTo.setType("plain/text");
-                    intentMailTo.putExtra(Intent.EXTRA_SUBJECT, "Mail's title");
-                    intentMailTo.putExtra(Intent.EXTRA_TEXT, "Hi there, this is a form app...");
-                    intentMailTo.putExtra(Intent.EXTRA_SUBJECT, new String[] {"prueba@gmail.com", "test@outlook.com"});
-                     */
-                    startActivity(intentMailTo);
+                    // Email mas completo
+                    Intent intentMailToAdv = new Intent(Intent.ACTION_SEND, Uri.parse(email));
+                    intentMailToAdv.setType("plain/text");
+                    intentMailToAdv.putExtra(Intent.EXTRA_SUBJECT, "Mail's title");
+                    intentMailToAdv.putExtra(Intent.EXTRA_TEXT, "Hi there, this is a form app...");
+                    intentMailToAdv.putExtra(Intent.EXTRA_EMAIL, new String[] {"prueba@gmail.com", "test@outlook.com"});
+                    startActivity(Intent.createChooser(intentMailToAdv, "Choose an email client"));
                 } else {
                     Toast.makeText(ThirdActivity.this, "Insert an email", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        // Acciones del botón para cámara
+        imageButtonCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentCam = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intentCam);
             }
         });
 
