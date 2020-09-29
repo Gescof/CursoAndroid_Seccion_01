@@ -2,13 +2,15 @@ package com.example.seccion_01;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     private Button btn1;
+    private final String GREETER = "Hello from main activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,18 +18,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         btn1 = findViewById(R.id.button1);
-        btn1.setOnClickListener(this);
-        /*btn1.setOnClickListener(new View.OnClickListener() {
+        // Acceder al segundo activity y enviarle un String
+        btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("greeter", GREETER);
+                startActivity(intent);
             }
-        });*/
-    }
-
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(MainActivity.this, "Button clicked!", Toast.LENGTH_LONG).show();
+        });
     }
 
 }
