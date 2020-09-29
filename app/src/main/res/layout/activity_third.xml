@@ -35,7 +35,7 @@
             android:layout_marginLeft="55dp"
             android:layout_marginTop="316dp"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +69,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/editTextWeb"
             app:layout_constraintEnd_toEndOf="@id/editTextWeb"
             app:layout_constraintStart_toEndOf="@+id/editTextWeb" />
+
     </RelativeLayout>
 
     <ImageButton

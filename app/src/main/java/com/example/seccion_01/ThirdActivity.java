@@ -34,6 +34,7 @@ public class ThirdActivity extends AppCompatActivity {
         imageButtonWeb = findViewById(R.id.imageButtonWeb);
         imageButtonCam = findViewById(R.id.imageButtonCam);
 
+        // Acciones del botón para la llamada
         imageButtonPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +60,19 @@ public class ThirdActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Acciones del botón para web
+        imageButtonWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = editTextWeb.getText().toString();
+                if(url != null && !url.isEmpty()) {
+                    Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + url));
+                    startActivity(intentWeb);
+                }
+            }
+        });
+
     }
 
     @Override
