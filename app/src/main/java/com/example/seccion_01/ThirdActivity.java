@@ -17,8 +17,11 @@ import android.widget.Toast;
 public class ThirdActivity extends AppCompatActivity {
     private EditText editTextPhone;
     private EditText editTextWeb;
+    private EditText editTextMail;
     private ImageButton imageButtonPhone;
     private ImageButton imageButtonWeb;
+    private ImageButton imageButtonAgenda;
+    private ImageButton imageButtonEmail;
     private ImageButton imageButtonCam;
 
     private final int PHONE_CALL_CODE = 100;
@@ -30,11 +33,14 @@ public class ThirdActivity extends AppCompatActivity {
 
         editTextPhone = findViewById(R.id.editTextPhone);
         editTextWeb = findViewById(R.id.editTextWeb);
+        editTextMail = findViewById(R.id.editTextTextEmailAddress);
         imageButtonPhone = findViewById(R.id.imageButtonPhone);
         imageButtonWeb = findViewById(R.id.imageButtonWeb);
+        imageButtonAgenda = findViewById(R.id.imageButtonAgenda);
+        imageButtonEmail = findViewById(R.id.imageButtonEmail);
         imageButtonCam = findViewById(R.id.imageButtonCam);
 
-        // Acciones del botón para la llamada
+        // Acciones del botón para llamada
         imageButtonPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +75,38 @@ public class ThirdActivity extends AppCompatActivity {
                 if(url != null && !url.isEmpty()) {
                     Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + url));
                     startActivity(intentWeb);
+                } else {
+                    Toast.makeText(ThirdActivity.this, "Insert a web URL", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        // Acciones del botón para contactos
+        imageButtonAgenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentContacts = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people"));
+                startActivity(intentContacts);
+            }
+        });
+
+        // Acciones del botón para email
+        imageButtonEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = editTextMail.getText().toString();
+                if(email != null && !email.isEmpty()) {
+                    Intent intentMailTo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
+                    /* Email mas completo
+                    Intent intentMailTo = new Intent(Intent.ACTION_SENDTO, Uri.parse(email));
+                    intentMailTo.setType("plain/text");
+                    intentMailTo.putExtra(Intent.EXTRA_SUBJECT, "Mail's title");
+                    intentMailTo.putExtra(Intent.EXTRA_TEXT, "Hi there, this is a form app...");
+                    intentMailTo.putExtra(Intent.EXTRA_SUBJECT, new String[] {"prueba@gmail.com", "test@outlook.com"});
+                     */
+                    startActivity(intentMailTo);
+                } else {
+                    Toast.makeText(ThirdActivity.this, "Insert an email", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -88,6 +126,9 @@ public class ThirdActivity extends AppCompatActivity {
                         // Permiso concedido
                         String phoneNumber = editTextPhone.getText().toString();
                         Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
+                        /* Telefono mejorado
+                        Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+                         */
                         startActivity(intentCall);
                     } else {
                         // No concedido
