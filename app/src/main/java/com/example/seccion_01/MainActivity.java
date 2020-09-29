@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher_round);
+
         btn1 = findViewById(R.id.button1);
         // Acceder al segundo activity y enviarle un String
         btn1.setOnClickListener(new View.OnClickListener() {
